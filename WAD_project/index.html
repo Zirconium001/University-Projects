@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pro Typing Test</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="backdrop backdrop-a"></div>
+<div class="backdrop backdrop-b"></div>
+
+<main class="app">
+  <section class="hero">
+    <div class="eyebrow">Typing test</div>
+    <h1>Pro Typing Test</h1>
+    <p>Type the text as cleanly and quickly as possible. Click anywhere to focus, then keep moving.</p>
+  </section>
+
+  <section class="stats-grid" aria-label="Typing statistics">
+    <div class="stat-card">
+      <span class="stat-label">Time</span>
+      <strong id="time">60</strong>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">WPM</span>
+      <strong id="wpm">0</strong>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">Accuracy</span>
+      <strong><span id="accuracy">100</span>%</strong>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">Mistakes</span>
+      <strong id="mistakes">0</strong>
+    </div>
+  </section>
+
+  <section class="controls">
+    <div class="duration-picker" id="duration-picker" aria-label="Select test duration">
+      <button class="duration-btn active" data-duration="30">30s</button>
+      <button class="duration-btn" data-duration="60">60s</button>
+      <button class="duration-btn" data-duration="120">120s</button>
+    </div>
+    <button id="restart" class="primary-btn">New test</button>
+  </section>
+
+  <section class="test-card">
+    <div class="test-card-top">
+      <span class="status-pill" id="status">Ready</span>
+      <div class="subtle" id="time-remaining">60 seconds</div>
+    </div>
+
+    <div id="text-display" class="text-display" aria-label="Typing prompt"></div>
+
+    <input id="hidden-input" autocomplete="off" autocapitalize="off" spellcheck="false" />
+
+    <div class="progress-shell" aria-hidden="true">
+      <div id="progress" class="progress-fill"></div>
+    </div>
+  </section>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
