@@ -17,6 +17,9 @@ public class Main {
         if (password == null || password.trim().isEmpty()) {
     throw new IllegalArgumentException("Password cannot be empty or blank!");
     }
+        if (password.length() > 16) {
+    throw new IllegalArgumentException("Password too long! Maximum 16 characters allowed.");
+   }  
 
         int score = 0;
         boolean hasUpper = false;
@@ -25,8 +28,8 @@ public class Main {
         boolean hasSpecial = false;
 
         if (password.length() >= 8) score += 2;
-        if (password.length() >= 12) score += 2;
-        if (password.length() >= 16) score += 2;
+        
+        
 
         for (char c : password.toCharArray()) {
             if (Character.isUpperCase(c)) hasUpper = true;
