@@ -1,7 +1,7 @@
 // ====== STATE ======
 const state = {
   text: "",
-  duration: 60,   // ✅ matches the "active" button in HTML (60s)
+  duration: 60,
   timeLeft: 60,
   timer: null,
   started: false,
