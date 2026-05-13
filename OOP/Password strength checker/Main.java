@@ -1,29 +1,33 @@
 import java.util.*;
 
 public class Main {
-
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter password: ");
         String password = sc.nextLine();
-
-        checkStrength(password);
+        try {
+            checkStrength(password);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
     }
 
     static void checkStrength(String password) {
-        int score = 0;
+         
+        if (password == null || password.trim().isEmpty()) {
+    throw new IllegalArgumentException("Password cannot be empty or blank!");
+    }
 
+        int score = 0;
         boolean hasUpper = false;
         boolean hasLower = false;
         boolean hasDigit = false;
         boolean hasSpecial = false;
 
-        // Length scoring
         if (password.length() >= 8) score += 2;
         if (password.length() >= 12) score += 2;
         if (password.length() >= 16) score += 2;
 
-        // Character checks
         for (char c : password.toCharArray()) {
             if (Character.isUpperCase(c)) hasUpper = true;
             else if (Character.isLowerCase(c)) hasLower = true;
@@ -36,7 +40,6 @@ public class Main {
         if (hasDigit) score += 1;
         if (hasSpecial) score += 2;
 
-        // Common password penalty
         String[] common = {"password", "123456", "qwerty", "admin"};
         for (String word : common) {
             if (password.toLowerCase().contains(word)) {
@@ -45,9 +48,7 @@ public class Main {
             }
         }
 
-        // Strength result
         System.out.println("Score: " + score);
-
         if (score <= 3)
             System.out.println("Weak Password");
         else if (score <= 6)
