@@ -43,7 +43,7 @@ public class Main {
         if (hasDigit) score += 1;
         if (hasSpecial) score += 2;
 
-        String[] common = {"password", "123456", "qwerty", "admin"};
+        String[] common = {"password", "123456", "qwerty", "admin", "hello"};
         for (String word : common) {
             if (password.toLowerCase().contains(word)) {
                 score -= 3;
