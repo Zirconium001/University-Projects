@@ -1,8 +1,13 @@
 import java.util.*;
 
 public class Main {
-    static final String[] COMMON = {"password", "123456", "qwerty", "admin", "hello"};
-    static final String SPECIALS = "!@#$%^&*";
+    static final String[] COMMON = {
+        "password", "123456", "qwerty", "admin", "hello",
+        "letmein", "welcome", "monkey", "dragon", "iloveyou",
+        "sunshine", "shadow", "superman", "trustno1", "football",
+        "baseball", "abc123", "pass123", "batman", "starwars"
+    };
+
     static final Random rand = new Random();
 
     public static void main(String[] args) {
@@ -17,10 +22,18 @@ public class Main {
     }
 
     static void checkStrength(String password) {
-        if (password == null || password.trim().isEmpty())
-            throw new IllegalArgumentException("Password cannot be empty or blank!");
+        // Basic sanity checks
+        if (password == null || password.isEmpty())
+            throw new IllegalArgumentException("Password cannot be empty.");
+
+        if (password.contains(" "))
+            throw new IllegalArgumentException("Password cannot contain spaces.");
+
+        if (password.length() < 6)
+            throw new IllegalArgumentException("Password must be at least 6 characters.");
+
         if (password.length() > 16)
-            throw new IllegalArgumentException("Password too long! Maximum 16 characters allowed.");
+            throw new IllegalArgumentException("Password cannot exceed 16 characters.");
 
         int score = 0;
         boolean hasUpper = false, hasLower = false, hasDigit = false, hasSpecial = false;
@@ -28,63 +41,50 @@ public class Main {
         if (password.length() >= 8) score += 2;
 
         for (char c : password.toCharArray()) {
-            if (Character.isUpperCase(c)) hasUpper = true;
+            if (Character.isUpperCase(c))      hasUpper = true;
             else if (Character.isLowerCase(c)) hasLower = true;
-            else if (Character.isDigit(c)) hasDigit = true;
-            else hasSpecial = true;
+            else if (Character.isDigit(c))     hasDigit = true;
+            else                               hasSpecial = true;
         }
 
-        if (hasUpper) score += 1;
-        if (hasLower) score += 1;
-        if (hasDigit) score += 1;
+        if (hasUpper)   score += 1;
+        if (hasLower)   score += 1;
+        if (hasDigit)   score += 1;
         if (hasSpecial) score += 2;
 
-        boolean hasCommon = false;
         for (String word : COMMON) {
             if (password.toLowerCase().contains(word)) {
                 score -= 3;
-                hasCommon = true;
                 break;
             }
         }
 
-        System.out.println("Score: " + score);
-
         String rating;
-        if (score <= 3) rating = "Weak";
+        if      (score <= 3) rating = "Weak";
         else if (score <= 6) rating = "Medium";
         else if (score <= 9) rating = "Strong";
-        else rating = "Very Strong";
+        else                 rating = "Very Strong";
 
-        System.out.println(rating + " Password");
+        System.out.println("Score : " + score);
+        System.out.println("Rating: " + rating);
 
         if (score <= 6) {
-            System.out.println("\nYour password is " + rating.toLowerCase() + ".");
-            System.out.println("Here's a stronger suggestion based on your input:");
-            System.out.println("  >> " + suggestPassword(password));
-            System.out.println("(Tip: it adds uppercase, digits, and special characters.)");
+            System.out.println("\nTip: Try something like -> " + suggest(password));
         }
     }
 
-    static String suggestPassword(String original) {
-        String base = original.replaceAll("(?i)password|123456|qwerty|admin|hello", "");
-        if (base.isEmpty()) base = "Secure";
+    static String suggest(String base) {
+        for (String word : COMMON)
+            base = base.replaceAll("(?i)" + word, "");
 
-        base = Character.toUpperCase(base.charAt(0)) + base.substring(1);
+        if (base.isEmpty()) base = "key";
 
-        StringBuilder sb = new StringBuilder(base);
-        for (int i = 1; i < sb.length(); i++) {
-            if ("aeiou".indexOf(sb.charAt(i)) >= 0 && i % 3 == 0)
-                sb.setCharAt(i, Character.toUpperCase(sb.charAt(i)));
-        }
+        String suggestion = Character.toUpperCase(base.charAt(0)) + base.substring(1)
+                          + (10 + rand.nextInt(90))
+                          + "!@#$".charAt(rand.nextInt(4));
 
-        String digits = String.valueOf(10 + rand.nextInt(90));
-        char special = SPECIALS.charAt(rand.nextInt(SPECIALS.length()));
-        sb.append(digits).append(special);
+        if (suggestion.length() > 16) suggestion = suggestion.substring(0, 16);
 
-        if (sb.length() < 8) sb.append("Xk!").append(SPECIALS.charAt(rand.nextInt(SPECIALS.length())));
-        if (sb.length() > 16) sb = new StringBuilder(sb.substring(0, 16));
-
-        return sb.toString();
+        return suggestion;
     }
 }
