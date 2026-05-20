@@ -3,7 +3,7 @@ import java.util.*;
 public class Main {
     static final String[] COMMON = {
         "password", "123456", "qwerty", "admin", "hello",
-        "letmein", "welcome", "monkey", "dragon", "iloveyou",
+        "golla", "iloveyou",
         "sunshine", "shadow", "superman", "trustno1", "football",
         "baseball", "abc123", "pass123", "batman", "starwars"
     };
@@ -46,6 +46,20 @@ public class Main {
             else if (Character.isDigit(c))     hasDigit = true;
             else                               hasSpecial = true;
         }
+
+        // Reject repeated word patterns (e.g. "hellohellohello")
+        String lower = password.toLowerCase();
+            for (String word : COMMON) {
+            int count = 0;
+            int idx = 0;
+       while ((idx = lower.indexOf(word, idx)) != -1) {
+           count++;
+           idx += word.length();
+        }
+    if (count >= 2)
+        throw new IllegalArgumentException(
+            "Password looks like a repeated word ('" + word + "' used " + count + " times). Try something more unique.");
+}
 
         if (hasUpper)   score += 1;
         if (hasLower)   score += 1;
