@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" data-switch="red">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flex-4</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="backdrop backdrop-a"></div>
+<div class="backdrop backdrop-b"></div>
+
+<main class="app">
+
+  <!-- SWITCH SELECTOR -->
+  <div class="switch-panel" aria-label="Theme selector">
+    <div class="switch-panel-label">SWITCH TYPE</div>
+    <div class="switch-toggles">
+
+      <button class="sw-toggle" data-theme="blue" aria-label="Blue Switch theme">
+        <div class="sw-housing">
+          <div class="sw-stem"></div>
+          <div class="sw-base"></div>
+        </div>
+        <span class="sw-label">BLUE</span>
+        <span class="sw-sub">Clicky</span>
+      </button>
+
+      <button class="sw-toggle active" data-theme="red" aria-label="Red Switch theme">
+        <div class="sw-housing">
+          <div class="sw-stem"></div>
+          <div class="sw-base"></div>
+        </div>
+        <span class="sw-label">RED</span>
+        <span class="sw-sub">Linear</span>
+      </button>
+
+      <button class="sw-toggle" data-theme="brown" aria-label="Brown Switch theme">
+        <div class="sw-housing">
+          <div class="sw-stem"></div>
+          <div class="sw-base"></div>
+        </div>
+        <span class="sw-label">BROWN</span>
+        <span class="sw-sub">Tactile</span>
+      </button>
+
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="eyebrow"><span class="eyebrow-dot"></span><span id="switch-name">Red Switch</span></div>
+    <h1><span class="hero-accent" id="hero-accent">Red</span> <span class="hero-white">Switch</span></h1>
+    <p id="hero-desc">Type clean. Type fast. Every keystroke counts — just like a perfectly lubed linear.</p>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats-grid" aria-label="Typing statistics">
+    <div class="stat-card">
+      <span class="stat-label">Time</span>
+      <strong id="time">60</strong>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">WPM</span>
+      <strong id="wpm">0</strong>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">Accuracy</span>
+      <strong><span id="accuracy">100</span>%</strong>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">Mistakes</span>
+      <strong id="mistakes">0</strong>
+    </div>
+  </section>
+
+  <!-- CONTROLS -->
+  <section class="controls">
+    <div class="duration-picker" id="duration-picker" aria-label="Select test duration">
+      <button class="duration-btn" data-duration="15">15s</button>
+      <button class="duration-btn" data-duration="30">30s</button>
+      <button class="duration-btn active" data-duration="60">60s</button>
+      <button class="duration-btn" data-duration="120">120s</button>
+    </div>
+    <button id="restart" class="primary-btn">New Test</button>
+  </section>
+
+  <!-- TEST CARD -->
+  <section class="test-card">
+    <div class="test-card-top">
+      <span class="status-pill" id="status">Ready</span>
+      <div class="subtle" id="time-remaining">60 seconds</div>
+    </div>
+    <div id="text-display" class="text-display" aria-label="Typing prompt"></div>
+    <input id="hidden-input" autocomplete="off" autocapitalize="off" spellcheck="false" />
+    <div class="progress-shell" aria-hidden="true">
+      <div id="progress" class="progress-fill"></div>
+    </div>
+  </section>
+
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
